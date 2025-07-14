@@ -1,0 +1,69 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Employee Directory</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="header">
+    <h1>Employee Directory</h1>
+    <div class="search-filter">
+      <input type="text" id="searchInput" placeholder="Search by name or email...">
+      <button onclick="filterEmployees()">Filter</button>
+    </div>
+  </header>
+
+  <div class="controls">
+    <label>Sort:
+      <select id="sortSelect" onchange="sortEmployees()">
+        <option value="">--Select--</option>
+        <option value="firstName">First Name</option>
+        <option value="department">Department</option>
+      </select>
+    </label>
+    <label>Show:
+      <select id="pageSize" onchange="paginateEmployees()">
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </label>
+    <button onclick="openAddEditForm()">Add Employee</button>
+  </div>
+
+  <div id="employee-list"></div>
+
+  <aside id="filterPanel" class="filter-panel">
+    <h3>Filter Employees</h3>
+    <label>First Name: <input type="text" id="filterName" oninput="filterEmployees()"></label><br>
+    <label>Department:
+      <select id="filterDept" onchange="filterEmployees()">
+        <option value="">All</option>
+        <option value="IT">IT</option>
+        <option value="HR">HR</option>
+        <option value="Finance">Finance</option>
+      </select>
+    </label><br>
+    <label>Role:
+      <select id="filterRole" onchange="filterEmployees()">
+        <option value="">All</option>
+        <option value="Admin">Admin</option>
+        <option value="Developer">Developer</option>
+        <option value="Manager">Manager</option>
+      </select>
+    </label><br>
+    <button onclick="filterEmployees()">Apply</button>
+    <button onclick="resetFilters()">Reset</button>
+  </aside>
+
+  <footer class="footer">
+    <p>&copy; 2025 Employee Directory App. All rights reserved.</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

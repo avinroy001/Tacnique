@@ -1,0 +1,79 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.header {
+  background-color: #222;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-filter input {
+  padding: 5px;
+  width: 200px;
+  margin-right: 10px;
+}
+
+.search-filter button {
+  padding: 5px 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.controls {
+  margin: 10px 20px;
+}
+
+.employee-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  width: calc(33% - 20px);
+  text-align: left;
+}
+
+.employee-card p {
+  margin: 0;
+}
+
+.employee-card button {
+  padding: 5px 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+#filterPanel {
+  position: fixed;
+  top: 150px;
+  right: 20px;
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.footer {
+  background-color: #222;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .employee-card {
+    width: calc(50% - 20px);
+  }
+}

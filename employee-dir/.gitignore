@@ -1,0 +1,23 @@
+# Node.js
+node_modules/
+npm-debug.log*
+.env
+
+# OS-generated
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+
+# Build & temp
+dist/
+temp/
+*.tmp
+*.bak
