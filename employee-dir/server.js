@@ -7,11 +7,9 @@ const PORT = 3000;
 
 const DATA_FILE = path.join(__dirname, "data", "employees.json");
 
-// Middleware
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public"))); // serve static HTML/JS/CSS
+app.use(express.static(path.join(__dirname, "public"))); 
 
-// GET: Fetch all employees
 app.get("/api/employees", (req, res) => {
   fs.readFile(DATA_FILE, "utf8", (err, data) => {
     if (err) {
@@ -22,23 +20,30 @@ app.get("/api/employees", (req, res) => {
   });
 });
 
-// POST: Add new employee
 app.post("/api/employees", (req, res) => {
-  fs.readFile(DATA_FILE, "utf8", (err, data) => {
-    if (err) return res.status(500).json({ error: "Failed to read data." });
+  console.log("🛠️ Received POST /api/employees:", req.body);
 
-    let employees = JSON.parse(data);
+  fs.readFile(DATA_FILE, "utf8", (err, data) => {
+    if (err) {
+      console.error("Error reading file:", err);
+      return res.status(500).json({ error: "Failed to read data." });
+    }
+
+    let employees = JSON.parse(data || "[]");
     const newEmployee = { id: Date.now().toString(), ...req.body };
     employees.push(newEmployee);
 
     fs.writeFile(DATA_FILE, JSON.stringify(employees, null, 2), (err) => {
-      if (err) return res.status(500).json({ error: "Failed to save employee." });
+      if (err) {
+        console.error("Error writing file:", err);
+        return res.status(500).json({ error: "Failed to save employee." });
+      }
+      console.log("Employee added:", newEmployee);
       res.status(201).json(newEmployee);
     });
   });
 });
 
-// Fallback: Serve index.html for root
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
@@ -80,9 +85,6 @@ app.put("/api/employees/:id", (req, res) => {
   });
 });
 
-
-
-// Start server
 app.listen(PORT, () => {
-  console.log(`✅ Server running at http://localhost:${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });

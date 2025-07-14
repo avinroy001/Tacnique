@@ -1,5 +1,3 @@
-// js/app.js — Node.js backend integration (no FreeMarker)
-
 let employees = [];
 let filteredEmployees = [];
 let showCount = 10;
@@ -19,6 +17,7 @@ async function loadEmployees() {
 
 function renderEmployees(data) {
   const container = document.getElementById("employee-list");
+  if (!container) return;
   container.innerHTML = "";
   const start = 0;
   const end = showCount;
@@ -89,7 +88,7 @@ function deleteEmployee(id) {
     })
       .then((res) => {
         if (!res.ok) throw new Error("Delete failed");
-        loadEmployees(); // Reload list after deletion
+        loadEmployees(); 
       })
       .catch((err) => {
         alert("Failed to delete employee.");
@@ -108,10 +107,17 @@ function editEmployee(id) {
 }
 
 window.onload = () => {
-  loadEmployees();
+  // if (document.getElementById("employee-list")) {
+  //   loadEmployees(); 
+  // }
+  setTimeout(() => {
+    const container = document.getElementById("employee-list");
+    if (container) {
+      loadEmployees();
+    }
+  }, 200);
 };
 
-// Save employee handler (used in addedit.html)
 function saveEmployee(emp) {
   const isEdit = new URLSearchParams(window.location.search).get("id") !== null;
 
@@ -128,7 +134,7 @@ function saveEmployee(emp) {
       window.location.href = "index.html";
     })
     .catch((err) => {
-      alert("❌ Failed to save employee.");
+      alert("Failed to save employee.");
       console.error(err);
     });
 }
